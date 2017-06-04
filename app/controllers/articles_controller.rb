@@ -20,8 +20,12 @@ def new
 end
 
 def create
-	current_user.articles.create(article_params)
-	redirect_to root_path
+	@article = current_user.articles.create(article_params)
+  if @article.valid?
+    redirect_to root_path
+  else
+    render :new, status: :unprocessable_entity
+  end
  end
 
  def show
@@ -45,7 +49,11 @@ def create
 
 
  	@article.update_attributes(article_params)
- 	redirect_to root_path
+ 	if @article.valid?
+    redirect_to root_path
+  else
+    render :edit, status: :unprocessable_entity
+  end
  end
 
  def destroy
