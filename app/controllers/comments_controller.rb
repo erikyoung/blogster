@@ -13,6 +13,9 @@ def create
  def edit
  end
 
+ def show
+ end
+
 
  def update
  	if @article.comment.user != current_user
@@ -30,18 +33,20 @@ def create
 
 
  def destroy
-    if @article.comment.user != current_user
+  @article = Article.find(params[:article_id])
+    @comment = Comment.find(params[:id])
+  if @comment.article.user != current_user
     return render text: 'Not Allowed', status: :forbidden
   end
 
-    @comment.destroy
-    redirect_to root_path
+  @comment.destroy
+  redirect_to root_path
  end
 
  private
 
   def comment_params
-    params.require(:comment).permit(:message, :user_id, :article_id)
+    params.require(:comment).permit(:message)
   end
 
   def find_article
