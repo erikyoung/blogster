@@ -1,11 +1,15 @@
 <% @articles.each do |article| %>
 	<div class="booyah-box col-10 offset-1">
 		<h1><%= article.title %></h1>
-	    <i><%= article.body %></i><br /><br />
+	    <i><%= @markdown.render(article.body).html_safe  %></i><br /><br />
 	   
-        <i><%= time_ago_in_words(article.created_at) %></i>
+        <h4>When: <%= time_ago_in_words(article.created_at) %></h4>
       
-        <i><%= @markdown.render(article.body).html_safe  %></i>
+        
+
+        <% if article.user.present? %>
+      <small><%= article.user.email %></small>
+    <% end %>
         
   </div>
 

@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+before_action :authenticate_user!, only: [:new, :create]
 
 def index
 	@articles = Article.all
@@ -19,13 +20,13 @@ def new
 end
 
 def create
-	Article.create(article_params)
+	current_user.articles.create(article_params)
 	redirect_to root_path
  end
 
  private
 
  def article_params
- 	params.require(:place).permit(:title, :body)
+ 	params.require(:article).permit(:title, :body)
  end
 end
