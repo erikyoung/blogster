@@ -1,5 +1,5 @@
 <% @articles.each do |article| %>
-	<div class="booyah-box">
+	<div class="booyah-box col-10 offset-1">
 		<h1><%= article.title %></h1>
 	    <i><%= article.body %></i><br /><br />
 	    
@@ -7,3 +7,8 @@
 
   
 <% end %>
+
+
+<div class="pagination col-xs-10 col-xs-offset-1">
+      <p><%= will_paginate @articles, previous_label: "Older", next_label: "Newer", renderer: BootstrapPagination::Rails %></p>
+</div>
