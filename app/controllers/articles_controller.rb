@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create]
+before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
 def index
 	@articles = Article.all
@@ -30,16 +30,31 @@ def create
 
  def edit
  	@article = Article.find(params[:id])
+
+ 	if @article.user != current_user
+    return render text: 'Not Allowed', status: :forbidden
+  end
  end
 
  def update
  	@article = Article.find(params[:id])
+
+ 	if @article.user != current_user
+    return render text: 'Not Allowed', status: :forbidden
+  end
+
+
  	@article.update_attributes(article_params)
  	redirect_to root_path
  end
 
  def destroy
  	 @article = Article.find(params[:id])
+ 	 if @article.user != current_user
+    return render text: 'Not Allowed', status: :forbidden
+  end
+
+
  	 @article.destroy
  	 redirect_to root_path
  end
