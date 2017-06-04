@@ -1,0 +1,8 @@
+<div class="booyah-box col-10 offset-1">
+	<h1><%= @article.title %></h1>
+	<i><%= @article.body %></i>
+	<br /><br />
+  <div class="float-right">
+    <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-primary' %>
+  </div>
+</div>

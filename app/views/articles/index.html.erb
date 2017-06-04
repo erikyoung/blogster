@@ -1,6 +1,6 @@
 <% @articles.each do |article| %>
 	<div class="booyah-box col-10 offset-1">
-		<h1><%= article.title %></h1>
+		<h1><%= link_to article.title, article_path(article) %></h1>
 	    <i><%= @markdown.render(article.body).html_safe  %></i><br /><br />
 	   
         <h4>When: <%= time_ago_in_words(article.created_at) %></h4>
