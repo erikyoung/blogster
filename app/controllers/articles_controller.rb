@@ -16,7 +16,7 @@ end
 
 
 def new 
-	 @article = Article.new
+	@article = Article.new
 end
 
 def create
@@ -30,6 +30,7 @@ def create
 
  def show
  	@article = Article.find(params[:id])
+ 	@comment = Comment.new
  end
 
  def edit
@@ -39,6 +40,7 @@ def create
     return render text: 'Not Allowed', status: :forbidden
   end
  end
+
 
  def update
  	@article = Article.find(params[:id])
