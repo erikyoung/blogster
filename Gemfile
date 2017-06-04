@@ -14,6 +14,13 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'redcarpet'
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap', '~> 1.0'
+gem 'simple_form'
+gem "font-awesome-rails"
+gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'devise'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
