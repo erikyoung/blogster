@@ -21,10 +21,21 @@
             <i class="fa fa-plus-circle">New Article</i>
             <% end %>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Link</a>
-          </li>
-        </ul>
+          </ul>
+     <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+      		<%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+    	</li>
+      <% end %>
+    </ul>
         <form class="form-inline my-2 my-lg-0">
           <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
 		  <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
@@ -34,12 +45,18 @@
       </div>
     </nav>
 
-    <div class="container">
+
+	<% if notice.present? %>
+	  <p class="alert alert-info"><%= notice %></p>
+	<% end %>
+	<% if alert.present? %>
+	  <p class="alert alert-danger"><%= alert %></p>
+	<% end %>
+    
 
     	<%= yield %>
 
-    </div>
-
+   
      <br class="clr" />
 
 
