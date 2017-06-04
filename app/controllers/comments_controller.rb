@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
 def index
 end	
@@ -10,29 +11,31 @@ def create
  end
 
  def edit
- 	@article = Article.find(params[:id])
-
- 	if comments.comment.user != current_user
-    return render text: 'Not Allowed', status: :forbidden
-  end
  end
 
 
  def update
- 	@comment.content = comment_params
-	if @comment.update(comment_params)
-		redirect_to article_path(@article)
-	else
-		render 'edit'
-	end
-end
+ 	if @article.comment.user != current_user
+    return render text: 'Not Allowed', status: :forbidden
+  end
+
+
+ 	@article.comment.update_attributes(comment_params)
+ 	if @article.comment.valid?
+    redirect_to root_path
+  else
+    render :edit, status: :unprocessable_entity
+  end
+ end
 
 
  def destroy
- 	@article = Article.find(params[:article_id])
- 	@comment = @article.comments.find(params[:id])
- 	@comment.destroy
-	redirect_to article_path(@article)
+    if @article.comment.user != current_user
+    return render text: 'Not Allowed', status: :forbidden
+  end
+
+    @comment.destroy
+    redirect_to root_path
  end
 
  private
@@ -40,4 +43,12 @@ end
   def comment_params
     params.require(:comment).permit(:message, :user_id, :article_id)
   end
+
+  def find_article
+	@article = Article.find(params[:article_id])
+end
+
+  def find_comment
+	comment = @article.comments.find(params[:id])
+ end
 end
