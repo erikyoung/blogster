@@ -30,7 +30,7 @@
     </blockquote>
     <br /><br />
   	<% if current_user && current_user == comment.user %>
-    	<%= link_to 'Edit', edit_article_comment_path(comment.article_id), class: 'btn btn-primary' %>
+    	<%= link_to 'Edit', edit_article_comment_path(comment.article_id, comment.id), class: 'btn btn-primary' %>
     	<%= link_to 'Destroy', article_comment_path(comment.article), method: :delete, data: {confirm: 'Are you sure you want to delete this?'},class: 'btn btn-danger' %>
     <% end %>
   </div>

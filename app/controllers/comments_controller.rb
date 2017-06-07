@@ -11,6 +11,9 @@ def create
  end
 
  def edit
+  puts params
+  article = Article.find(params[:article_id])
+  @comment = article.comments.find(params[:id])
  end
 
  def show
@@ -18,7 +21,9 @@ def create
 
 
  def update
- 	if @article.comment.user != current_user
+  @article = Article.find(params[:article_id])
+  @comment = @article.comment.find(params[:id])
+ 	if @comment.user != current_user
     return render text: 'Not Allowed', status: :forbidden
   end
 

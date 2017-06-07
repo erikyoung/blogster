@@ -1,5 +1,5 @@
 <div class="booyah-box col-10 offset-1">
-<%= simple_form_for @comment  do |f| %>
+<%= simple_form_for @comment, url: article_comment_path(@comment, :article_id => @comment.article_id)  do |f| %>
   <%= f.input :message %>
   <br />
   <%= f.submit 'Update', class: 'btn btn-primary' %>
