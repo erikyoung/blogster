@@ -4,6 +4,10 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
 def index
 end	
 
+def new
+  @comments = Comment.new(params[:id])
+  end
+
 def create
 	@article = Article.find(params[:article_id])
 	@article.comments.create(comment_params.merge(user: current_user))
@@ -11,25 +15,26 @@ def create
  end
 
  def edit
-  puts params
   article = Article.find(params[:article_id])
   @comment = article.comments.find(params[:id])
  end
 
  def show
+  @article = Article.find(params[:article_id])
+  @comment = @article.comments.find(params[:id])
  end
 
 
  def update
   @article = Article.find(params[:article_id])
-  @comment = @article.comment.find(params[:id])
+  @comment = @article.comments.find(params[:id]) 
  	if @comment.user != current_user
     return render text: 'Not Allowed', status: :forbidden
   end
 
 
- 	@article.comment.update_attributes(comment_params)
- 	if @article.comment.valid?
+ 	@comment.update_attributes(comment_params)
+ 	if @comment.valid?
     redirect_to root_path
   else
     render :edit, status: :unprocessable_entity
