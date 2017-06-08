@@ -11,9 +11,9 @@
 
 Submitted by: **Erik Young**
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
-URL: **Insert your Heroku URL here**
+URL: ** https://blogster-erik.herokuapp.com**
 
 ## User Stories
 
@@ -46,7 +46,6 @@ The following **optional** features are implemented:
 * [ ] User can add "tags" to a Article, and filter Articles by 
 tag.
 * [X] Number of comments is counted
-* [X] Has a functioning footer that displays social media icons
 * [X] Implemented the use of simple form gem to create User Articles
 * [X] Added an image carousel to the landing page 
 * [X]  Added pagination to the search functionality
